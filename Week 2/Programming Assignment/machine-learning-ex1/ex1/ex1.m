@@ -19,27 +19,16 @@
 %  For this exercise, you will not need to change any code in this file,
 %  or any other files other than those mentioned above.
 %
-% x refers to the population size in 10,000s
-% y refers to the profit in $10,000s
+% x = CO refers to the population size in 10,000s = 
+% y = T3P refers to the profit in $10,000s
 %
-
-%% Initialization
-clear ; close all; clc
-
-%% ==================== Part 1: Basic Function ====================
-% Complete warmUpExercise.m 
-fprintf('Running warmUpExercise ... \n');
-fprintf('5x5 Identity Matrix: \n');
-warmUpExercise()
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
 
 %% ======================= Part 2: Plotting =======================
 fprintf('Plotting Data ...\n')
-data = load('ex1data1.txt'); % read comma separated data
-X = data(:, 1); y = data(:, 2);
+
+X = CO_MND_train'; % Motor torque 
+
+y = T3P_MND_train'; % Temperature of compressor
 m = length(y); % number of training examples
 
 % Plot Data
@@ -52,11 +41,11 @@ pause;
 %% =================== Part 3: Gradient descent ===================
 fprintf('Running Gradient Descent ...\n')
 
-X = [ones(m, 1), data(:,1)]; % Add a column of ones to x
+X = [ones(m, 1), CO_MND_train']; % Add a column of ones to x
 theta = zeros(2, 1); % initialize fitting parameters
 
 % Some gradient descent settings
-iterations = 1500;
+iterations = 1000;
 alpha = 0.01;
 
 % compute and display initial cost
@@ -75,7 +64,7 @@ plot(X(:,2), X*theta, '-')
 legend('Training data', 'Linear regression')
 hold off % don't overlay any more plots on this figure
 
-% Predict values for population sizes of 35,000 and 70,000
+%Predict values for population sizes of 35,000 and 70,000
 predict1 = [1, 1.8] *theta;
 fprintf('For population = 18,000, we predict a profit of %f\n',...
     predict1*10000);
